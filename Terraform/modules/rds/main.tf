@@ -6,10 +6,11 @@ resource "aws_db_instance" "mysql_instance" {
   engine_version = var.engine_version
   instance_class = var.instance_class
   identifier = "dev-database-mysql"
-  username = "devops"
-  password = "devopstest"
+  username = var.username_db
+  password = var.password_db
   skip_final_snapshot = true
   allow_major_version_upgrade = true
+  port = "3306"
 
   availability_zone = "${var.region}a"
   vpc_security_group_ids = [var.RDSSG_id]

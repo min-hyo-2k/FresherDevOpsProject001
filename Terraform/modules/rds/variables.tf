@@ -3,6 +3,16 @@ variable "db_name" {
   default = "dev_rds"
 }
 
+variable "username_db" {
+  type = string
+  default = "devops"
+}
+
+variable "password_db" {
+  type = string
+  default = "devopstest"
+}
+
 variable "engine_version" {
   type = string
   default = "8.0.33"
