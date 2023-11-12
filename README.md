@@ -11,7 +11,7 @@
 - Managing secrets using GitHub Secrets. (In Progress...)
 
 ## Project Structure
-![Infrastructure](./assests/DevOpsDiagram.drawio.jpg)
+![Infrastructure](./assests/DevOpsDiagram.jpg)
 
 ## Technologies Used:
 1. **Terraform (IaC)**: To deploy AWS Infrastructure resources using Terraform modules.
