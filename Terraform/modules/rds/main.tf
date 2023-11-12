@@ -12,13 +12,13 @@ resource "aws_db_instance" "mysql_instance" {
   allow_major_version_upgrade = true
 
   availability_zone = "${var.region}a"
-  vpc_security_group_ids = [module.sg.RDSSG_id]
+  vpc_security_group_ids = [var.RDSSG_id]
   db_subnet_group_name = aws_db_subnet_group.rds-subnet-group.name
 }
 
 resource "aws_db_subnet_group" "rds-subnet-group" {
   name       = "main"
-  subnet_ids = [module.network.private_db_subnet_1_id, module.network.private_db_subnet_2_id]
+  subnet_ids = [var.private_db_subnet_1_id, var.private_db_subnet_2_id]
 
   tags = {
     Name = "My DB subnet group"

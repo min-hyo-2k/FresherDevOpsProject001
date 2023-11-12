@@ -17,3 +17,15 @@ variable "region" {
   type = string
   default = "ap-southeast-1"
 }
+
+variable "RDSSG_id" {
+  type = string
+}
+
+variable "private_db_subnet_1_id" {
+  type = string
+}
+
+variable "private_db_subnet_2_id" {
+  type = string
+}

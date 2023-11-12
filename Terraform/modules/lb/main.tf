@@ -6,8 +6,8 @@ resource "aws_lb" "main" {
   internal = false
 
   load_balancer_type = "application"
-  security_groups = [module.sg.ALBSG_id]
-  subnets = [module.network.public_subnet_1_id, module.network.public_subnet_2_id]
+  security_groups = [var.ALBSG_id]
+  subnets = [var.public_subnet_1_id, var.public_subnet_2_id]
 }
 
 # target group
@@ -25,21 +25,19 @@ resource "aws_lb_target_group" "main" {
   name     = "my-alb-target-group"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = module.network.vpc_id
+  vpc_id   = var.vpc_id
 }
 
 # attach target group to ec2 instance
 resource "aws_lb_target_group_attachment" "test1" {
-  depends_on = [module.ec2.aws_instance.application_instance_1]
   target_group_arn = aws_lb_target_group.main.arn
-  target_id        = module.ec2.application_instance_1_id
+  target_id        = var.application_instance_1_id
   port             = 80
 }
 
 resource "aws_lb_target_group_attachment" "test2" {
-  depends_on = [module.ec2.aws_instance.application_instance_2]
   target_group_arn = aws_lb_target_group.main.arn
-  target_id        = module.ec2.application_instance_2_id
+  target_id        = var.application_instance_2_id
   port             = 80
 }
 
