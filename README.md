@@ -9,6 +9,7 @@
 - Provisoin EC2 Instances using Ansible. (In Progress...)
 - Create task using lambda. (In Progress...)
 - Managing secrets using GitHub Secrets. (In Progress...)
+- Replace EC2 to ECS for running containers. (In Progress...)
 
 ## Project Structure
 ![Infrastructure](./assests/DevOpsDiagram.jpg)
@@ -18,6 +19,7 @@
 2. **AWS Resources**:
 	- VPC (2 Public Subnets, 4 Private Subnets, Elastic IP, Nat Gateway, Internet Gateway).
 	- 3 EC2 Instances (two for hosting the app and bastion host to ssh), and Application Load Balancer.
+    	- ECR.
 	- RDS.
 	- S3 and Dynamodb: to store state file and lock it.
 	- Security Groups.
