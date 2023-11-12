@@ -12,3 +12,10 @@ on:
         options:
         - apply
         - destroy
+
+env:
+  TRIGGER: '${{ inputs.trigger }}' # "manual workflow"
+
+jobs:
+  build-aws-infra:
+    runs-on: ubuntu-latest
