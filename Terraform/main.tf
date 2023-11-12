@@ -44,3 +44,8 @@ module "lb" {
   application_instance_1_id = module.ec2.application_instance_1_id
   application_instance_2_id = module.ec2.application_instance_2_id
 }
+
+# ecr
+module "ecr" {
+  source = "./modules/ecr"
+}
