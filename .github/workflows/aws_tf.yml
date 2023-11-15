@@ -5,9 +5,9 @@ on:
   workflow_dispatch: # Allow to run this workflow manually from the Actions tab
     inputs:
       trigger:
-        description: "apply OR destroy" # apply to build infra, destroy to destroy it all.
+        description: "apply OR destroy" # Apply to build infra, destroy to destroy it all.
         required: true
-        default: apply # will choose the word apply for you when triggering the pipeline manually.
+        default: apply # Will choose the word apply for you when triggering the pipeline manually.
         type: choice
         options:
         - apply
@@ -15,7 +15,40 @@ on:
 
 env:
   TRIGGER: '${{ inputs.trigger }}' # "manual workflow"
+  AWS_REGION: ap-southeast-1 # singapore
+  # GitHub Secret
+  EC2_PUBLIC_SSH_KEY: ${{ secrets.AWS_SSH_PUBLIC_KEY }} # Used to upload public key to aws.
+  EC2_PRIVATE_SSH_KEY: ${{ secrets.AWS_EC2_SSH_PRIVATE_KEY }} # Used to ssh into EC2.
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # AWS User Credentials.
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # AWS User Credentials.
+
+
+
 
 jobs:
   build-aws-infra:
     runs-on: ubuntu-latest
+
+    outputs:
+      x:
+      y:
+
+    steps:
+      # Check-out a repository so a workflow can access it.
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Initializes a working directory containing Terraform configuration files.
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ./Terraform
+
+      # Checks that all Terraform configuration files in the correct format
+      - name: Terraform Format
+        run: |-
+          terraform fmt -recursive
+          terraform fmt -check
+        working-directory: ./Terraform
+
+      - name: 
