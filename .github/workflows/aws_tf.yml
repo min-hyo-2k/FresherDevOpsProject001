@@ -51,4 +51,12 @@ jobs:
           terraform fmt -check
         working-directory: ./Terraform
 
-      - name: 
+      # do trigger  
+      - name: Terraform ${{ env.TRIGGER }} # reference to env above then down just call env
+        id: apply-or-destroy # i name both of this cuz id only can have static name not changing name.
+        run: |-
+          terraform $TRIGGER \
+          -var="public_key=$EC2_PUBLIC_SSH_KEY" \
+          -var="key_name=ssh_key_aws" \
+          -auto-approve
+        working-directory: ./Terraform
